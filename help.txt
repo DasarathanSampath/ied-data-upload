@@ -1,3 +1,7 @@
 change the collection name and year name in importIedData.js
 Then run the below command
-node importIedData.js
+node importIedLegis.js filename
+
+or
+
+node importIedParli.js filename

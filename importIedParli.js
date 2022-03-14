@@ -21,10 +21,12 @@ const db = new Firestore();
 function writeToFirestore(records) {
   const batchCommits = [];
   let batch = db.batch();
+  console.log(records[0]);
   records.forEach((record, i) => {
-    var docRef = db.collection('parliamentary').doc('2019');
-    var docRefSub = docRef.collection(record.pcname).doc(record.party);
-    batch.set(docRefSub, record);
+    var docRef = db.collection('parliamentary').doc(record.year);
+    var docRefState = docRef.collection(record.statename).doc(record.year);
+    var docRefid = docRefState.collection(record.pcname).doc(record.id);
+    batch.set(docRefid, record);
     if ((i + 1) % 500 === 0) {
       console.log(`Writing record ${i + 1}`);
       batchCommits.push(batch.commit());
